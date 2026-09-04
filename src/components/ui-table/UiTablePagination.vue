@@ -8,9 +8,7 @@
     >
       &larr; Назад
     </button>
-    <span class="ui-table-pagination__info">
-      Страница {{ page }} из {{ pageCount }}
-    </span>
+    <span class="ui-table-pagination__info"> Страница {{ page }} из {{ pageCount }} </span>
     <button
       class="ui-table-pagination__button"
       type="button"

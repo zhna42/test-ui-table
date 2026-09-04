@@ -12,12 +12,7 @@
       <table class="ui-table__table">
         <UiTableHeader :columns="columns" />
         <tbody>
-          <UiTableItem
-            v-for="(item, index) in items"
-            :key="index"
-            :columns="columns"
-            :item="item"
-          >
+          <UiTableItem v-for="(item, index) in items" :key="index" :columns="columns" :item="item">
             <template
               v-for="column in visibleColumns"
               :key="column.name"
@@ -81,9 +76,7 @@ const emit = defineEmits<{
 }>()
 
 const searchableColumns = computed(() => props.columns.filter((column) => column.isSearch))
-const visibleColumns = computed(() =>
-  props.columns.filter((column) => column.visible !== false),
-)
+const visibleColumns = computed(() => props.columns.filter((column) => column.visible !== false))
 const empty = computed(() => !props.items.length)
 </script>
 

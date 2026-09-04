@@ -1,10 +1,7 @@
 import { computed, ref } from 'vue'
 import { defineStore } from 'pinia'
 import { getCharacters } from '@/api/characters'
-import type {
-  CharacterDto,
-  CharacterQueryParamsDto,
-} from '@/types/character.dto'
+import type { CharacterDto, CharacterQueryParamsDto } from '@/types/character.dto'
 
 export const useCharacterStore = defineStore('character', () => {
   const characters = ref<CharacterDto[]>([])

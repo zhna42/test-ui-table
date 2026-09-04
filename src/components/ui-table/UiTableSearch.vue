@@ -2,11 +2,7 @@
   <form role="search" class="ui-table-search" @submit.prevent="handleSubmit">
     <label class="ui-table-search__label">
       <span class="ui-table-search__sr-only">Поле поиска</span>
-      <select
-        v-model="activeField"
-        class="ui-table-search__field"
-        @change="handleFieldChange"
-      >
+      <select v-model="activeField" class="ui-table-search__field" @change="handleFieldChange">
         <option v-for="option in options" :key="option.value" :value="option.value">
           {{ option.label }}
         </option>

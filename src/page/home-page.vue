@@ -74,9 +74,7 @@ const router = useRouter()
 const characterStore = useCharacterStore()
 
 const activeSearchColumn = computed(() =>
-  columns.find(
-    (column) => column.isSearch && column.searchName && route.query[column.searchName],
-  ),
+  columns.find((column) => column.isSearch && column.searchName && route.query[column.searchName]),
 )
 
 const searchField = computed(() => activeSearchColumn.value?.searchName ?? '')

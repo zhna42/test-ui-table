@@ -5,12 +5,7 @@
       :key="column.name"
       class="ui-table__cell"
     >
-      <slot
-        :name="column.name"
-        :item="item"
-        :value="resolveValue(column, item)"
-        :column="column"
-      />
+      <slot :name="column.name" :item="item" :value="resolveValue(column, item)" :column="column" />
     </td>
   </tr>
 </template>
