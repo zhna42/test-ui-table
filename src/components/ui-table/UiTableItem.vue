@@ -1,10 +1,6 @@
 <template>
   <tr class="ui-table__row">
-    <td
-      v-for="column in columns.filter((c) => c.visible !== false)"
-      :key="column.name"
-      class="ui-table__cell"
-    >
+      <td v-for="column in columns" :key="column.name" class="ui-table__cell">
       <slot :name="column.name" :item="item" :value="resolveValue(column, item)" :column="column" />
     </td>
   </tr>

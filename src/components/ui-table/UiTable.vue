@@ -10,9 +10,14 @@
 
     <div class="ui-table__scroll">
       <table class="ui-table__table">
-        <UiTableHeader :columns="columns" />
+        <UiTableHeader :columns="visibleColumns" />
         <tbody>
-          <UiTableItem v-for="(item, index) in items" :key="index" :columns="columns" :item="item">
+          <UiTableItem
+            v-for="(item, index) in items"
+            :key="keyOf(item, index)"
+            :columns="visibleColumns"
+            :item="item"
+          >
             <template
               v-for="column in visibleColumns"
               :key="column.name"
@@ -47,7 +52,7 @@ import UiTableHeader from './UiTableHeader.vue'
 import UiTableItem from './UiTableItem.vue'
 import UiTablePagination from './UiTablePagination.vue'
 import UiTableSearch from './UiTableSearch.vue'
-import { toDisplayText } from '@/utils/column'
+import { toDisplayText, getByPath } from '@/utils/column'
 import type { Column } from '@/types/table'
 
 const props = withDefaults(
@@ -59,6 +64,8 @@ const props = withDefaults(
     loading?: boolean
     searchField?: string
     searchValue?: string
+    /** Путь до уникального ключа строки (например 'id'). Иначе используется индекс. */
+    rowKeyPath?: string
   }>(),
   {
     page: 1,
@@ -66,6 +73,7 @@ const props = withDefaults(
     loading: false,
     searchField: '',
     searchValue: '',
+    rowKeyPath: '',
   },
 )
 
@@ -78,6 +86,14 @@ const emit = defineEmits<{
 const searchableColumns = computed(() => props.columns.filter((column) => column.isSearch))
 const visibleColumns = computed(() => props.columns.filter((column) => column.visible !== false))
 const empty = computed(() => !props.items.length)
+
+const keyOf = (item: unknown, index: number): string | number => {
+  if (!props.rowKeyPath) {
+    return index
+  }
+  const value = getByPath(item, props.rowKeyPath)
+  return value === undefined || value === null ? index : String(value)
+}
 </script>
 
 <style scoped lang="scss">

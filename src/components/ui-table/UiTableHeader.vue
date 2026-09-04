@@ -1,11 +1,7 @@
 <template>
   <thead class="ui-table__head">
     <tr>
-      <th
-        v-for="column in columns.filter((c) => c.visible !== false)"
-        :key="column.name"
-        scope="col"
-      >
+      <th v-for="column in columns" :key="column.name" scope="col">
         {{ column.label ?? column.name }}
       </th>
     </tr>

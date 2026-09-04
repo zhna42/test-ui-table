@@ -5,6 +5,7 @@
     <UiTable
       :columns="columns"
       :items="characterStore.characters"
+      row-key-path="id"
       :page="characterStore.currentPage"
       :page-count="characterStore.totalPages"
       :loading="characterStore.isLoading"
