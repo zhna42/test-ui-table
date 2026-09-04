@@ -1,15 +1,5 @@
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-}
+@use './variables' as *;
+@use './mixins' as *;
+@use './reset';
 
-html,
-body {
-  margin: 0;
-  padding: 0;
-}
-
-#app {
-  min-height: 100svh;
-}
+// Глобальные переопределения/утилиты — добавлять здесь.

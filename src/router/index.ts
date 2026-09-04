@@ -3,7 +3,7 @@ import type { RouteRecordRaw } from 'vue-router'
 
 const routes: RouteRecordRaw[] = [
   // TODO: маршруты приложения. Пример:
-  // { path: '/', name: 'home', component: () => import('../views/HomeView.vue') }
+  // { path: '/', name: 'home', component: () => import('@/views/HomeView.vue') }
 ]
 
 const router = createRouter({

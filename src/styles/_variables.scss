@@ -1,0 +1,55 @@
+// Fonts
+$font-family-base: system-ui, 'Segoe UI', roboto, 'Helvetica Neue', arial, sans-serif;
+$font-family-mono: ui-monospace, 'SF Mono', 'Cascadia Code', consolas, monospace;
+
+// Breakpoints
+$breakpoints: (
+  xs: 480px,
+  sm: 640px,
+  md: 768px,
+  lg: 1024px,
+  xl: 1280px,
+  xxl: 1536px,
+);
+
+// Colors
+$color-primary: #2563eb;
+$color-primary-hover: #1d4ed8;
+$color-text: #1f2937;
+$color-text-muted: #6b7280;
+$color-border: #e5e7eb;
+$color-bg: #fff;
+$color-bg-alt: #f9fafb;
+$color-danger: #dc2626;
+$color-success: #16a34a;
+$color-warning: #d97706;
+
+// Spacing scale
+$spacing-1: 0.25rem;
+$spacing-2: 0.5rem;
+$spacing-3: 0.75rem;
+$spacing-4: 1rem;
+$spacing-6: 1.5rem;
+$spacing-8: 2rem;
+$spacing-12: 3rem;
+$spacing-16: 4rem;
+
+// Radius
+$radius-sm: 0.25rem;
+$radius-md: 0.5rem;
+$radius-lg: 0.75rem;
+$radius-full: 9999px;
+
+// Transitions
+$transition-fast: 0.15s ease;
+$transition-base: 0.25s ease;
+
+// Z-index
+$z-header: 100;
+$z-modal: 1000;
+$z-overlay: 900;
+
+// Shadow
+$shadow-sm: 0 1px 2px rgb(0 0 0 / 5%);
+$shadow-md: 0 4px 6px -1px rgb(0 0 0 / 10%);
+$shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 10%);
