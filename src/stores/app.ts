@@ -4,7 +4,7 @@ import { ref } from 'vue'
 export const useAppStore = defineStore('app', () => {
   const count = ref(0)
 
-  function increment() {
+  const increment = (): void => {
     count.value++
   }
 

@@ -24,13 +24,10 @@ http.interceptors.request.use(
 
 http.interceptors.response.use(
   (response) => response,
-  (error) => {
-    // TODO: глобальная обработка ошибок (401 → logout/redirect, показ сообщений и т.п.)
-    return Promise.reject(error)
-  },
+  (error) => Promise.reject(error),
 )
 
-export function getErrorMessage(error: unknown): string {
+export const getErrorMessage = (error: unknown): string => {
   if (axios.isAxiosError(error)) {
     const data = error.response?.data as { message?: string } | undefined
     return data?.message ?? error.message
