@@ -1,3 +1,4 @@
+import type { AxiosRequestConfig } from 'axios'
 import { http } from './http'
 import { buildQueryString } from '@/utils/query'
 import type {
@@ -8,9 +9,10 @@ import type {
 
 export const getCharacters = (
   params: CharacterQueryParamsDto = {},
+  options?: AxiosRequestConfig,
 ): Promise<CharactersResponseDto> => {
   const query = buildQueryString(params)
-  return http.get(`/character/${query}`).then((response) => response.data)
+  return http.get(`/character/${query}`, options).then((response) => response.data)
 }
 
 export const getCharacter = (id: number): Promise<CharacterDto> =>
