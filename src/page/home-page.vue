@@ -31,7 +31,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, watch } from 'vue'
+import { computed, ref, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import type { LocationQueryRaw } from 'vue-router'
 import UiTable from '@/components/ui-table/UiTable.vue'
@@ -79,7 +79,15 @@ const activeSearchColumn = computed(() =>
   columns.find((column) => column.isSearch && column.searchName && route.query[column.searchName]),
 )
 
-const searchField = computed(() => activeSearchColumn.value?.searchName ?? '')
+const firstSearchableName = columns.find((c) => c.isSearch && c.searchName)?.searchName ?? ''
+const searchField = ref<string>(activeSearchColumn.value?.searchName ?? firstSearchableName)
+
+watch(activeSearchColumn, (active) => {
+  if (active?.searchName) {
+    searchField.value = active.searchName
+  }
+})
+
 const searchValue = computed(() =>
   activeSearchColumn.value?.searchName
     ? String(route.query[activeSearchColumn.value.searchName] ?? '')
@@ -109,6 +117,7 @@ const goToPage = (page: number): void => {
 }
 
 const onSearch = ({ searchName, value }: { searchName: string; value: string }): void => {
+  searchField.value = searchName
   const next: LocationQueryRaw = { ...route.query }
 
   for (const column of columns) {

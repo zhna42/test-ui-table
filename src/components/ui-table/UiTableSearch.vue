@@ -15,7 +15,7 @@
         type="search"
         class="ui-table-search__input"
         placeholder="Поиск..."
-        @input="handleChange(text)"
+        @input="handleInput"
       />
     </label>
   </form>
@@ -61,9 +61,20 @@ const clearTimer = (): void => {
 const handleChange = (value: string): void => {
   emit('update:value', value)
   clearTimer()
+
+  if (!value) {
+    // Полная очистка — сразу выполняем запрос без фильтра
+    emit('change', { searchName: activeField.value, value: '' })
+    return
+  }
+
   debounceTimer = setTimeout(() => {
     emit('change', { searchName: activeField.value, value })
   }, 300)
+}
+
+const handleInput = (event: Event): void => {
+  handleChange((event.target as HTMLInputElement).value)
 }
 
 const handleFieldChange = (): void => {
@@ -81,17 +92,6 @@ watch(
   () => props.field,
   (field) => {
     activeField.value = field
-  },
-)
-
-watch(
-  () => props.value,
-  (value) => {
-    if (value !== text.value) {
-      text.value = value
-      clearTimer()
-      emit('change', { searchName: activeField.value, value })
-    }
   },
 )
 

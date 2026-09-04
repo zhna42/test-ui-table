@@ -56,6 +56,8 @@ export const useCharacterStore = defineStore('character', () => {
       }
       isError.value = true
       characters.value = []
+      // Инвалидируем кэш, иначе следующий запрос с тем же target будет пропущен
+      lastTarget = ''
 
       const status = (error as { response?: { status?: number } })?.response?.status
       // 404 и пустой ответ показываются как «не найдено»; остальное — общая ошибка
