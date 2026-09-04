@@ -67,7 +67,6 @@ const handleChange = (value: string): void => {
 }
 
 const handleFieldChange = (): void => {
-  // Смена поля сбрасывает текст поиска
   text.value = ''
   emit('update:value', '')
   emit('change', { searchName: activeField.value, value: '' })
@@ -82,6 +81,17 @@ watch(
   () => props.field,
   (field) => {
     activeField.value = field
+  },
+)
+
+watch(
+  () => props.value,
+  (value) => {
+    if (value !== text.value) {
+      text.value = value
+      clearTimer()
+      emit('change', { searchName: activeField.value, value })
+    }
   },
 )
 
