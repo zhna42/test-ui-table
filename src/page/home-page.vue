@@ -9,6 +9,7 @@
       :page="characterStore.currentPage"
       :page-count="characterStore.totalPages"
       :loading="characterStore.isLoading"
+      :message="characterStore.errorMessage"
       :search-field="searchField"
       :search-value="searchValue"
       @next-page="goToPage(characterStore.currentPage + 1)"

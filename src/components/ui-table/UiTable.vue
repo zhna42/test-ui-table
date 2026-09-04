@@ -30,7 +30,7 @@
           </UiTableItem>
           <tr v-if="empty" class="ui-table__empty-row" aria-live="polite">
             <td :colspan="visibleColumns.length" class="ui-table__empty-cell">
-              {{ loading ? 'Загрузка...' : 'Нет данных' }}
+              {{ loading ? 'Загрузка...' : message || 'Данные не найдены' }}
             </td>
           </tr>
         </tbody>
@@ -64,6 +64,8 @@ const props = withDefaults(
     loading?: boolean
     searchField?: string
     searchValue?: string
+    /** Сообщение состояния (ошибка/пусто). Пусто → «Данные не найдены». */
+    message?: string
     /** Путь до уникального ключа строки (например 'id'). Иначе используется индекс. */
     rowKeyPath?: string
   }>(),
@@ -73,6 +75,7 @@ const props = withDefaults(
     loading: false,
     searchField: '',
     searchValue: '',
+    message: '',
     rowKeyPath: '',
   },
 )

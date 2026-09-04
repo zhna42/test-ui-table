@@ -11,6 +11,7 @@ export const useCharacterStore = defineStore('character', () => {
   const count = ref(0)
   const isLoading = ref(false)
   const isError = ref(false)
+  const errorMessage = ref('')
 
   const hasNextPage = computed(() => currentPage.value < totalPages.value)
   const hasPrevPage = computed(() => currentPage.value > 1)
@@ -32,6 +33,7 @@ export const useCharacterStore = defineStore('character', () => {
 
     isLoading.value = true
     isError.value = false
+    errorMessage.value = ''
 
     try {
       const response = await getCharacters(
@@ -53,7 +55,11 @@ export const useCharacterStore = defineStore('character', () => {
         return
       }
       isError.value = true
-      throw error
+      characters.value = []
+
+      const status = (error as { response?: { status?: number } })?.response?.status
+      // 404 и пустой ответ показываются как «не найдено»; остальное — общая ошибка
+      errorMessage.value = status === 404 ? '' : 'Ой, что-то пошло не так. Попробуйте позже.'
     } finally {
       if (seq === requestSeq) {
         isLoading.value = false
@@ -101,6 +107,7 @@ export const useCharacterStore = defineStore('character', () => {
     count,
     isLoading,
     isError,
+    errorMessage,
     hasNextPage,
     hasPrevPage,
     fetchPage,
